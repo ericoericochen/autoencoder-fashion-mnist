@@ -49,7 +49,10 @@ class Encoder(nn.Module):
         self.layers = create_modules(*params)
 
     def forward(self, x: torch.Tensor):
-        return self.layers(x)
+        for layer in self.layers:
+            x = layer(x)
+
+        return x
 
 
 class Decoder(nn.Module):
@@ -69,7 +72,10 @@ class Decoder(nn.Module):
         self.layers = create_modules(*params)
 
     def forward(self, x: torch.Tensor):
-        return self.layers(x)
+        for layer in self.layers:
+            x = layer(x)
+
+        return x
 
 
 class AutoEncoder(nn.Module):
